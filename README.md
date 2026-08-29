@@ -1,2 +1,392 @@
 # flagship-uav-system
+
 Virtual first UAV telemetry, communications, RF signal analysis and defensive UAV detection system.
+
+
+
+\# Flagship UAV System
+
+
+
+\## Overview
+
+
+
+The Flagship UAV System is a long-term engineering project focused on the design and development of a UAV telemetry, communications, RF signal analysis and defensive UAV detection ecosystem.
+
+
+
+The project is being developed using a virtual first approach. The system will initially be designed and tested using software simulations, mathematical models and synthetic data before selected components are progressively transitioned to physical hardware.
+
+
+
+The project is intended to demonstrate practical engineering capability across robotics, UAV systems, embedded systems, communications, RF engineering, signal processing, cybersecurity, data engineering and systems engineering.
+
+
+
+\---
+
+
+
+\## Project Objectives
+
+
+
+The system is intended to eventually demonstrate the ability to:
+
+
+
+\* Generate UAV telemetry.
+
+\* Simulate and analyse RF signals.
+
+\* Transmit and receive telemetry.
+
+\* Protect communications using appropriate security mechanisms.
+
+\* Store and analyse telemetry and detection data.
+
+\* Display UAV and detection information through a graphical user interface.
+
+\* Detect, track and classify simulated UAV related signals.
+
+\* Identify unknown or anomalous emitters.
+
+\* Combine multiple sources of information for threat assessment.
+
+\* Generate alerts based on defined detection conditions.
+
+\* Transition selected virtual subsystems to physical hardware.
+
+
+
+\---
+
+
+
+\## High Level Architecture
+
+
+
+The initial system architecture consists of four major areas:
+
+
+
+```text
+
+&#x20;                   FLAGSHIP UAV SYSTEM
+
+&#x20;                           │
+
+&#x20;       ┌───────────────────┼───────────────────┐
+
+&#x20;       │                   │                   │
+
+&#x20;       ▼                   ▼                   ▼
+
+&#x20;      UAV          COMMUNICATIONS        GROUND STATION
+
+&#x20;       │                   │                   │
+
+&#x20;       │                   │          ┌────────┼────────┐
+
+&#x20;       │                   │          │        │        │
+
+&#x20;       │                   │       Telemetry Database  GUI
+
+&#x20;       │                   │
+
+&#x20;       └───────────────────┼────────────────────┘
+
+&#x20;                           │
+
+&#x20;                           ▼
+
+&#x20;                DEFENSIVE UAV DETECTION
+
+&#x20;                           │
+
+&#x20;                ┌──────────┼──────────┐
+
+&#x20;                ▼          ▼          ▼
+
+&#x20;               RF       Tracking   Classification
+
+&#x20;             Analysis
+
+&#x20;                │          │          │
+
+&#x20;                └──────────┼──────────┘
+
+&#x20;                           ▼
+
+&#x20;                   Threat Assessment
+
+&#x20;                           │
+
+&#x20;                           ▼
+
+&#x20;                         Alerts
+
+```
+
+
+
+This architecture is expected to evolve as the system requirements and engineering understanding develop.
+
+
+
+\---
+
+
+
+\## Development Approach
+
+
+
+The project will be developed incrementally:
+
+
+
+```text
+
+Requirements
+
+&#x20;    ↓
+
+System Architecture
+
+&#x20;    ↓
+
+Software Fundamentals
+
+&#x20;    ↓
+
+UAV Simulation
+
+&#x20;    ↓
+
+Telemetry
+
+&#x20;    ↓
+
+Communications
+
+&#x20;    ↓
+
+Ground Station
+
+&#x20;    ↓
+
+Database
+
+&#x20;    ↓
+
+RF Analysis
+
+&#x20;    ↓
+
+Detection \& Classification
+
+&#x20;    ↓
+
+Sensor Fusion
+
+&#x20;    ↓
+
+Testing \& Fault Injection
+
+&#x20;    ↓
+
+Physical Hardware Integration
+
+```
+
+
+
+The virtual system will be developed and tested before attempting to reproduce selected components using physical hardware.
+
+
+
+\---
+
+
+
+\## Engineering Areas
+
+
+
+The project will cover a number of engineering disciplines, including:
+
+
+
+\* Systems engineering
+
+\* Robotics
+
+\* UAV engineering
+
+\* Mechatronics
+
+\* Embedded systems
+
+\* Electronics
+
+\* Sensors
+
+\* Control systems
+
+\* Python
+
+\* C/C++
+
+\* Networking
+
+\* RF engineering
+
+\* Signal processing
+
+\* SDR fundamentals
+
+\* Cybersecurity
+
+\* Data engineering
+
+\* Databases
+
+\* Software engineering
+
+\* Testing and validation
+
+
+
+\---
+
+
+
+\## Current Status
+
+
+
+\*\*Stage: Day 1 — Requirements and Initial System Architecture\*\*
+
+
+
+Current work is focused on establishing the engineering requirements, system architecture, development methodology and project documentation.
+
+
+
+No complete system has been implemented yet.
+
+
+
+\---
+
+
+
+\## Safety and Legal Scope
+
+
+
+The project is primarily intended for simulation, education and engineering development.
+
+
+
+RF and SIGINT related work will focus on:
+
+
+
+\* Synthetic signals
+
+\* Simulated emitters
+
+\* Publicly available datasets
+
+\* Signals generated by the project
+
+\* Equipment and signals for which appropriate permission exists
+
+
+
+The defensive UAV component is focused on:
+
+
+
+\*\*Detection → Tracking → Classification → Monitoring → Threat Assessment → Alerting\*\*
+
+
+
+The project will not be developed for:
+
+
+
+\* Intercepting private communications
+
+\* Bypassing access controls
+
+\* Breaking communications encryption
+
+\* Jamming
+
+\* Spoofing real world systems
+
+\* Hijacking aircraft
+
+\* Disabling aircraft
+
+\* Offensive counter-UAS operations
+
+
+
+UK RF and communications regulations will be checked against appropriate authoritative sources before any physical RF work is undertaken.
+
+
+
+\---
+
+
+
+\## Engineering Philosophy
+
+
+
+The primary objective is not simply to complete the system.
+
+
+
+The objective is to develop the ability to:
+
+
+
+1\. Understand the engineering principles behind each subsystem.
+
+2\. Design solutions to defined requirements.
+
+3\. Explain design decisions.
+
+4\. Test and validate implementations.
+
+5\. Diagnose and debug failures.
+
+6\. Document engineering work professionally.
+
+7\. Demonstrate the resulting capability to others.
+
+
+
+\---
+
+
+
+\## Project Status
+
+
+
+This project is under active development.
+
+
+
+The architecture, requirements and implementation will evolve as new engineering knowledge is gained and subsystem testing identifies necessary changes.
+
+
+
