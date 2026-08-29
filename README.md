@@ -74,59 +74,59 @@ The initial system architecture consists of four major areas:
 
 ```text
 
-&#x20;                   FLAGSHIP UAV SYSTEM
+              FLAGSHIP UAV SYSTEM
 
-&#x20;                           │
+                           │
 
-&#x20;       ┌───────────────────┼───────────────────┐
+      ┌───────────────────┼───────────────────┐
 
-&#x20;       │                   │                   │
+      │                   │                   │
 
-&#x20;       ▼                   ▼                   ▼
+     ▼                   ▼                   ▼
 
-&#x20;      UAV          COMMUNICATIONS        GROUND STATION
+    UAV          COMMUNICATIONS        GROUND STATION
 
-&#x20;       │                   │                   │
+     │                   │                   │
 
-&#x20;       │                   │          ┌────────┼────────┐
+     │                   │          ┌────────┼────────┐
 
-&#x20;       │                   │          │        │        │
+     │                   │          │        │        │
 
-&#x20;       │                   │       Telemetry Database  GUI
+     │                   │       Telemetry Database  GUI
 
-&#x20;       │                   │
+     │                   │
 
-&#x20;       └───────────────────┼────────────────────┘
+     └───────────────────┼────────────────────┘
 
-&#x20;                           │
+                        │
 
-&#x20;                           ▼
+                        ▼
 
-&#x20;                DEFENSIVE UAV DETECTION
+            DEFENSIVE UAV DETECTION
 
-&#x20;                           │
+                        │
 
-&#x20;                ┌──────────┼──────────┐
+             ┌──────────┼──────────┐
 
-&#x20;                ▼          ▼          ▼
+             ▼          ▼          ▼
 
-&#x20;               RF       Tracking   Classification
+            RF       Tracking   Classification
 
-&#x20;             Analysis
+           Analysis
 
-&#x20;                │          │          │
+               │          │          │
 
-&#x20;                └──────────┼──────────┘
+               └──────────┼──────────┘
 
-&#x20;                           ▼
+                           ▼
 
-&#x20;                   Threat Assessment
+                  Threat Assessment
 
-&#x20;                           │
+                       │
 
-&#x20;                           ▼
+                       ▼
 
-&#x20;                         Alerts
+                     Alerts
 
 ```
 
@@ -152,51 +152,51 @@ The project will be developed incrementally:
 
 Requirements
 
-&#x20;    ↓
+↓
 
 System Architecture
 
-&#x20;    ↓
+↓
 
 Software Fundamentals
 
-&#x20;    ↓
+↓
 
 UAV Simulation
 
-&#x20;    ↓
+↓
 
 Telemetry
 
-&#x20;    ↓
+↓
 
 Communications
 
-&#x20;    ↓
+↓
 
 Ground Station
 
-&#x20;    ↓
+↓
 
 Database
 
-&#x20;    ↓
+↓
 
 RF Analysis
 
-&#x20;    ↓
+↓
 
-Detection \& Classification
+Detection & Classification
 
-&#x20;    ↓
+↓
 
 Sensor Fusion
 
-&#x20;    ↓
+↓
 
-Testing \& Fault Injection
+Testing & Fault Injection
 
-&#x20;    ↓
+↓
 
 Physical Hardware Integration
 
