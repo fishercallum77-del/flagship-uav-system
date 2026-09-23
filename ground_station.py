@@ -49,7 +49,9 @@ def validate_telemetry(telemetry):
 
     if "heading" in telemetry:
         if telemetry["heading"] < 0 or telemetry["heading"] >= 360:
-            errors.append("Heading must be between 0 and 359.99 degrees")
+            errors.append(
+                "Heading must be between 0 and 359.99 degrees"
+            )
 
     if "target_heading" in telemetry:
         if telemetry["target_heading"] < 0 or telemetry["target_heading"] >= 360:
@@ -74,9 +76,7 @@ def validate_telemetry_consistency(previous_telemetry, telemetry):
     expected_time = previous_telemetry["simulation_time"] + 1
 
     if telemetry["simulation_time"] != expected_time:
-        errors.append(
-            "Simulation time is not progressing correctly"
-        )
+        errors.append("Simulation time is not progressing correctly")
 
     return errors
 
@@ -183,14 +183,18 @@ def get_mission_summary(telemetry_history):
     starting_battery = first_telemetry["battery"]
     current_battery = latest_telemetry["battery"]
 
-    battery_consumed = starting_battery - current_battery
+    battery_consumed = (
+        starting_battery - current_battery
+    )
 
     highest_altitude = max(
         telemetry["altitude"]
         for telemetry in telemetry_history
     )
 
-    total_distance = calculate_total_distance(telemetry_history)
+    total_distance = calculate_total_distance(
+        telemetry_history
+    )
 
     return {
         "telemetry_records": len(telemetry_history),
@@ -212,6 +216,58 @@ def get_mission_summary(telemetry_history):
     }
 
 
+def analyze_flight_states(telemetry_history):
+    state_analysis = {}
+
+    for telemetry in telemetry_history:
+        state = telemetry["flight_state"]
+
+        if state not in state_analysis:
+            state_analysis[state] = {
+                "records": 0,
+                "start_time": telemetry["simulation_time"],
+                "end_time": telemetry["simulation_time"],
+                "starting_battery": telemetry["battery"],
+                "current_battery": telemetry["battery"],
+                "total_speed": 0
+            }
+
+        state_analysis[state]["records"] += 1
+
+        state_analysis[state]["end_time"] = (
+            telemetry["simulation_time"]
+        )
+
+        state_analysis[state]["current_battery"] = (
+            telemetry["battery"]
+        )
+
+        state_analysis[state]["total_speed"] += (
+            telemetry["speed"]
+        )
+
+    for state, data in state_analysis.items():
+        data["duration"] = (
+            data["end_time"]
+            - data["start_time"]
+            + 1
+        )
+
+        data["average_speed"] = (
+            data["total_speed"]
+            / data["records"]
+        )
+
+        data["battery_consumed"] = (
+            data["starting_battery"]
+            - data["current_battery"]
+        )
+
+        del data["total_speed"]
+
+    return state_analysis
+
+
 def display_uav_status(status):
     print()
     print("===== UAV STATUS =====")
@@ -223,7 +279,10 @@ def display_uav_status(status):
     print(f"Flight State: {status['flight_state']}")
     print(f"Flight Mode: {status['flight_mode']}")
     print(f"Current Waypoint: {status['current_waypoint']}")
-    print(f"Distance to Waypoint: {status['distance_to_waypoint']:.2f} m")
+    print(
+        f"Distance to Waypoint: "
+        f"{status['distance_to_waypoint']:.2f} m"
+    )
     print("======================")
 
 
@@ -239,12 +298,58 @@ mission_summary = get_mission_summary(telemetry)
 
 print()
 print("===== MISSION SUMMARY =====")
-print(f"Telemetry Records: {mission_summary['telemetry_records']}")
-print(f"Mission Duration: {mission_summary['mission_duration']} seconds")
-print(f"Starting Battery: {mission_summary['starting_battery']:.1f}%")
-print(f"Current Battery: {mission_summary['current_battery']:.1f}%")
-print(f"Battery Consumed: {mission_summary['battery_consumed']:.1f}%")
-print(f"Highest Altitude: {mission_summary['highest_altitude']:.1f} m")
-print(f"Total Distance: {mission_summary['total_distance']:.1f} m")
-print(f"Current Waypoint: {mission_summary['current_waypoint']}")
+print(
+    f"Telemetry Records: "
+    f"{mission_summary['telemetry_records']}"
+)
+print(
+    f"Mission Duration: "
+    f"{mission_summary['mission_duration']} seconds"
+)
+print(
+    f"Starting Battery: "
+    f"{mission_summary['starting_battery']:.1f}%"
+)
+print(
+    f"Current Battery: "
+    f"{mission_summary['current_battery']:.1f}%"
+)
+print(
+    f"Battery Consumed: "
+    f"{mission_summary['battery_consumed']:.1f}%"
+)
+print(
+    f"Highest Altitude: "
+    f"{mission_summary['highest_altitude']:.1f} m"
+)
+print(
+    f"Total Distance: "
+    f"{mission_summary['total_distance']:.1f} m"
+)
+print(
+    f"Current Waypoint: "
+    f"{mission_summary['current_waypoint']}"
+)
 print("==========================")
+
+
+flight_state_analysis = analyze_flight_states(telemetry)
+
+print()
+print("===== FLIGHT STATE ANALYSIS =====")
+
+for state, data in flight_state_analysis.items():
+    print()
+    print(state)
+    print(f"Duration: {data['duration']} seconds")
+    print(
+        f"Average Speed: "
+        f"{data['average_speed']:.2f} m/s"
+    )
+    print(
+        f"Battery Consumed: "
+        f"{data['battery_consumed']:.2f}%"
+    )
+
+print()
+print("=================================")
