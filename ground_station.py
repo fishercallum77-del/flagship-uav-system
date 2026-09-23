@@ -42,6 +42,26 @@ def validate_telemetry(telemetry):
         if field not in telemetry:
             errors.append(f"Missing field: {field}")
 
+    if "battery" in telemetry:
+        if telemetry["battery"] < 0 or telemetry["battery"] > 100:
+            errors.append("Battery must be between 0 and 100")
+
+    if "heading" in telemetry:
+        if telemetry["heading"] < 0 or telemetry["heading"] >= 360:
+            errors.append("Heading must be between 0 and 359.99 degrees")
+
+    if "target_heading" in telemetry:
+        if telemetry["target_heading"] < 0 or telemetry["target_heading"] >= 360:
+            errors.append("Target heading must be between 0 and 359.99 degrees")
+
+    if "altitude" in telemetry:
+        if telemetry["altitude"] < 0:
+            errors.append("Altitude cannot be negative")
+
+    if "speed" in telemetry:
+        if telemetry["speed"] < 0:
+            errors.append("Speed cannot be negative")
+
     return errors
 
 
