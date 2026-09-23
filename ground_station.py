@@ -36,11 +36,13 @@ def validate_telemetry(telemetry):
         "distance_to_waypoint"
     ]
 
+    errors = []
+
     for field in required_fields:
         if field not in telemetry:
-            return False
+            errors.append(f"Missing field: {field}")
 
-    return True
+    return errors
 
 
 def load_telemetry(filename):
@@ -52,8 +54,15 @@ def load_telemetry(filename):
         for row in reader:
             telemetry = parse_telemetry(row)
 
-            if validate_telemetry(telemetry):
+            validation_errors = validate_telemetry(telemetry)
+
+            if not validation_errors:
                 telemetry_history.append(telemetry)
+            else:
+                print("Invalid telemetry record:")
+
+                for error in validation_errors:
+                    print(f"  - {error}")
 
     return telemetry_history
 
