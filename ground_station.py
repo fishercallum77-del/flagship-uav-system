@@ -268,6 +268,46 @@ def analyze_flight_states(telemetry_history):
     return state_analysis
 
 
+def analyze_movement(telemetry_history):
+    if not telemetry_history:
+        return None
+
+    total_distance = calculate_total_distance(
+        telemetry_history
+    )
+
+    speeds = [
+        telemetry["speed"]
+        for telemetry in telemetry_history
+    ]
+
+    altitudes = [
+        telemetry["altitude"]
+        for telemetry in telemetry_history
+    ]
+
+    turning_events = 0
+    currently_turning = False
+
+    for telemetry in telemetry_history:
+        if telemetry["flight_mode"] == "TURNING":
+            if not currently_turning:
+                turning_events += 1
+
+            currently_turning = True
+        else:
+            currently_turning = False
+
+    return {
+        "total_distance": total_distance,
+        "average_speed": sum(speeds) / len(speeds),
+        "maximum_speed": max(speeds),
+        "average_altitude": sum(altitudes) / len(altitudes),
+        "maximum_altitude": max(altitudes),
+        "turning_events": turning_events
+    }
+
+
 def display_uav_status(status):
     print()
     print("===== UAV STATUS =====")
@@ -353,3 +393,34 @@ for state, data in flight_state_analysis.items():
 
 print()
 print("=================================")
+
+
+movement_analysis = analyze_movement(telemetry)
+
+print()
+print("===== MOVEMENT ANALYSIS =====")
+print(
+    f"Total Distance: "
+    f"{movement_analysis['total_distance']:.1f} m"
+)
+print(
+    f"Average Speed: "
+    f"{movement_analysis['average_speed']:.2f} m/s"
+)
+print(
+    f"Maximum Speed: "
+    f"{movement_analysis['maximum_speed']:.2f} m/s"
+)
+print(
+    f"Average Altitude: "
+    f"{movement_analysis['average_altitude']:.2f} m"
+)
+print(
+    f"Maximum Altitude: "
+    f"{movement_analysis['maximum_altitude']:.2f} m"
+)
+print(
+    f"Turning Events: "
+    f"{movement_analysis['turning_events']}"
+)
+print("============================")
