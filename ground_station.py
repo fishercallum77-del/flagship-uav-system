@@ -308,6 +308,34 @@ def analyze_movement(telemetry_history):
     }
 
 
+def analyze_waypoints(telemetry_history):
+    if not telemetry_history:
+        return None
+
+    waypoint_analysis = {}
+    previous_waypoint = telemetry_history[0]["current_waypoint"]
+
+    for telemetry in telemetry_history[1:]:
+        current_waypoint = telemetry["current_waypoint"]
+
+        if current_waypoint != previous_waypoint:
+            waypoint_analysis[previous_waypoint] = {
+                "reached_at": telemetry["simulation_time"],
+                "position": (
+                    telemetry["latitude"],
+                    telemetry["longitude"]
+                ),
+                "battery": telemetry["battery"],
+                "distance_to_waypoint": (
+                    telemetry["distance_to_waypoint"]
+                )
+            }
+
+        previous_waypoint = current_waypoint
+
+    return waypoint_analysis
+
+
 def display_uav_status(status):
     print()
     print("===== UAV STATUS =====")
@@ -424,3 +452,29 @@ print(
     f"{movement_analysis['turning_events']}"
 )
 print("============================")
+
+
+waypoint_analysis = analyze_waypoints(telemetry)
+
+print()
+print("===== WAYPOINT ANALYSIS =====")
+
+if waypoint_analysis:
+    for waypoint, data in waypoint_analysis.items():
+        print()
+        print(f"Waypoint {waypoint}")
+        print(f"Reached At: {data['reached_at']} seconds")
+        print(
+            f"Position: "
+            f"{data['position'][0]}, "
+            f"{data['position'][1]}"
+        )
+        print(f"Battery: {data['battery']:.1f}%")
+        print(
+            f"Distance to Waypoint: "
+            f"{data['distance_to_waypoint']:.2f} m"
+        )
+else:
+    print("No waypoint transitions detected.")
+
+print("=============================")
